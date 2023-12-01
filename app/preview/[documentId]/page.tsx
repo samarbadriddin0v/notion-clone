@@ -5,10 +5,9 @@ import Toolbar from "@/components/shared/toolbar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { useMutation, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
-import "@blocknote/core/style.css";
 
 interface DocumentIdPageProps {
   params: {
@@ -16,11 +15,10 @@ interface DocumentIdPageProps {
   };
 }
 
-const DocumentIdage = ({ params }: DocumentIdPageProps) => {
+const Page = ({ params }: DocumentIdPageProps) => {
   const document = useQuery(api.document.getDocumentById, {
     id: params.documentId as Id<"documents">,
   });
-  const updateFields = useMutation(api.document.updateFields);
 
   const Editor = useMemo(
     () => dynamic(() => import("@/components/shared/editor"), { ssr: false }),
@@ -45,23 +43,20 @@ const DocumentIdage = ({ params }: DocumentIdPageProps) => {
 
   if (document === null) return null;
 
-  const onChange = (value: string) => {
-    updateFields({
-      id: document._id,
-      content: value,
-    });
-  };
-
   return (
     <div className="pb-40">
-      <Cover url={document.coverImage} />
+      <Cover url={document.coverImage} preview />
 
       <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
-        <Toolbar document={document} />
-        <Editor initialContent={document.content} onChange={onChange} />
+        <Toolbar document={document} preview />
+        <Editor
+          initialContent={document.content}
+          onChange={() => {}}
+          editable={false}
+        />
       </div>
     </div>
   );
 };
 
-export default DocumentIdage;
+export default Page;
