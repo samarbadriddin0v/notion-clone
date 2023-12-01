@@ -1,7 +1,7 @@
 export default {
   providers: [
     {
-      domain: "https://equal-goat-81.clerk.accounts.dev",
+      domain: `${process.env.NEXT_PUBLIC_JWT_TEMPLATE_URL}`,
       applicationID: "convex",
     },
   ],
