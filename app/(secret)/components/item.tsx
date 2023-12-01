@@ -21,7 +21,9 @@ import {
   Plus,
   Trash,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { use } from "react";
+import { toast } from "sonner";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -47,7 +49,23 @@ export const Item = ({
   icon: Icon,
 }: ItemProps) => {
   const { user } = useUser();
+  const router = useRouter();
+
   const createDocument = useMutation(api.document.createDocument);
+  const archive = useMutation(api.document.archive);
+
+  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    if (!id) return;
+
+    const promise = archive({ id }).then(() => router.push("/documents"));
+
+    toast.promise(promise, {
+      loading: "Archiving document...",
+      success: "Archived document!",
+      error: "Failed to archive document",
+    });
+  };
 
   const onCreateDocument = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -121,7 +139,7 @@ export const Item = ({
               side="right"
               forceMount
             >
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={onArchive}>
                 <Trash className="h-4 w-4 mr-2" />
                 Delete
               </DropdownMenuItem>

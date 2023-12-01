@@ -24,9 +24,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import TrashBox from "./trash-box";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export const Sidebar = () => {
   const isMobile = useMediaQuery("(max-width: 770px)");
+  const router = useRouter();
   const createDocument = useMutation(api.document.createDocument);
 
   const sidebarRef = useRef<ElementRef<"div">>(null);
@@ -101,8 +104,14 @@ export const Sidebar = () => {
   };
 
   const onCreateDocument = () => {
-    createDocument({
+    const promise = createDocument({
       title: "Untitled",
+    }).then((docId) => router.push(`/documents/${docId}`));
+
+    toast.promise(promise, {
+      loading: "Createing a new document...",
+      success: "Created a new document!",
+      error: "Failed to create a new document",
     });
   };
 
