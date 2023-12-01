@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center" id="title">Building a Notion Clone with Next.js Stripe Node.js Shadcn UI and TypeScript</h1>
 
-## Getting Started
+<p align="center"><img src="https://media.graphassets.com/gVATMdzAQNiHOD9rolSO" alt="project-image"></p>
 
-First, run the development server:
+<p id="description">Unlock the potential of modern web development by enrolling in our comprehensive course on building a Notion clone using cutting-edge technologies. This hands-on project-based learning experience will guide you through the entire process of creating a feature-rich collaborative note-taking application equipped with the latest web development tools and frameworks.</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<h2>🚀 Demo</h2>
+
+[https://x.sammi.pro/](https://x.sammi.pro/)
+
+  
+  
+<h2>🧐 Features</h2>
+
+Here're some of the project's best features:
+
+*   Real-time database 🔗
+*   Recover deleted files 🔄📄
+*   Stripe Integration
+*   Subscription plan
+*   Light and Dark mode 🌓
+*   Blocknote
+*   Expandable sidebar ➡️🔀⬅️
+*   Infinite children documents 🌲
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. Install packages</p>
+
+```
+npm i & yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p>2. Setup .env file</p>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+# CLERK AUTHORIZATION ENVIRONMENT VARIABLES
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# CONVEX ENVIRONMENT VARIABLES
+CONVEX_DEPLOYMENT=
+NEXT_PUBLIC_CONVEX_URL=
 
-## Learn More
+# DOMAIN
+NEXT_PUBLIC_DOMAIN=
 
-To learn more about Next.js, take a look at the following resources:
+# EDGE STORE
+EDGE_STORE_ACCESS_KEY=
+EDGE_STORE_SECRET_KEY=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# STRIPE 
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+NEXT_PUBLIC_STRIPE_SECRET_KEY=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<p>3. Setup Convex</p>
 
-## Deploy on Vercel
+```
+npx convex dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p>4. Start the app</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm run dev
+```
+
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   ReactJS
+*   TypeScript
+*   Stripe
+*   TypeScript
+*   Convex
+*   Clerk
+*   NextJS App routes
+*   Custom hooks
+*   TailwindCSS
+*   Shadcn UI
+*   Edge store
