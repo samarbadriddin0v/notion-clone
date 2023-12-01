@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blocknote/core": "^0.9.6",
+    "@blocknote/react": "^0.9.6",
     "@clerk/clerk-react": "^4.28.1",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -22,11 +24,13 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "convex": "^1.6.2",
+    "emoji-picker-react": "^4.5.16",
     "lucide-react": "^0.294.0",
     "next": "14.0.3",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-textarea-autosize": "^8.5.3",
     "sonner": "^1.2.4",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
