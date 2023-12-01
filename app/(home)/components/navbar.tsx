@@ -4,12 +4,12 @@ import React from "react";
 import { Logo } from "./logo";
 import { ModeToggle } from "@/components/shared/mode-toggle";
 import { Button } from "@/components/ui/button";
-import { useScrolled } from "@/hooks/use-scrolled";
 import { cn } from "@/lib/utils";
 import { SignInButton, UserButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
 import Link from "next/link";
 import { Loader } from "@/components/ui/loader";
+import { useScrolled } from "@/hooks/use-scrolled";
 
 export const Navbar = () => {
   const { isAuthenticated, isLoading } = useConvexAuth();
