@@ -5,13 +5,18 @@ import { Loader } from "@/components/ui/loader";
 import { SignInButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
 import { Check } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "sonner";
+import axios from "axios";
+import { useUser } from "@clerk/clerk-react";
+import { useRouter } from "next/navigation";
 
 interface PricingCardProps {
   title: string;
   subtitle: string;
   options: string;
   price: string;
+  priceId?: string;
 }
 
 export const PricingCard = ({
@@ -19,8 +24,34 @@ export const PricingCard = ({
   price,
   subtitle,
   title,
+  priceId,
 }: PricingCardProps) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
+  const { user } = useUser();
+  const router = useRouter();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async () => {
+    if (price === "Free") {
+      router.push("/documents");
+      return;
+    }
+    setIsSubmitting(true);
+
+    try {
+      const { data } = await axios.post("/api/stripe/subscription", {
+        priceId,
+        email: user?.emailAddresses[0].emailAddress,
+        userId: user?.id,
+      });
+      window.open(data, "_self");
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-black dark:text-white">
@@ -43,7 +74,18 @@ export const PricingCard = ({
         </div>
       )}
 
-      {isAuthenticated && !isLoading && <Button>Get Started</Button>}
+      {isAuthenticated && !isLoading && (
+        <Button onClick={onSubmit} disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <Loader />
+              <span className="ml-2">Submitting</span>
+            </>
+          ) : (
+            "Get Started"
+          )}
+        </Button>
+      )}
 
       {!isAuthenticated && !isLoading && (
         <SignInButton mode="modal">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,9 +14,16 @@ import { ModeToggle } from "../shared/mode-toggle";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Settings } from "lucide-react";
+import axios from "axios";
+import { toast } from "sonner";
+import { useUser } from "@clerk/clerk-react";
+import { Loader } from "../ui/loader";
 
 const SettingsModal = () => {
   const settings = useSettings();
+  const { user } = useUser();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { isOpen, onClose, onToggle } = settings;
 
@@ -31,6 +38,26 @@ const SettingsModal = () => {
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, [onToggle]);
+
+  const onSubmit = async () => {
+    setIsSubmitting(true);
+
+    try {
+      const { data } = await axios.post("/api/stripe/manage", {
+        email: user?.emailAddresses[0].emailAddress,
+      });
+      if (!data.status) {
+        setIsSubmitting(false);
+        toast.error("You are not subscribed to any plan.");
+        return;
+      }
+      window.open(data.url, "_self");
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -54,8 +81,8 @@ const SettingsModal = () => {
               Manage your subscription and billing information
             </span>
           </div>
-          <Button size={"sm"}>
-            <Settings size={16} />
+          <Button size={"sm"} onClick={onSubmit}>
+            {isSubmitting ? <Loader /> : <Settings size={16} />}
           </Button>
         </div>
       </DialogContent>

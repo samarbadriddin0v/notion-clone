@@ -49,6 +49,7 @@ const cards = [
     options:
       "Unlimited blocks for teams, Unlimited file uploads, 30 day page history, Invite 100 guests",
     price: "8",
+    priceId: "price_1OIa9xL7w2jHXlsS4WjLBAXz",
   },
   {
     title: "Business",
@@ -56,5 +57,6 @@ const cards = [
     options:
       "SAML SSO, Private teamspaces, Bulk PDF export, Advanced page analytics, 90 day page history, Invite 250 guests",
     price: "15",
+    priceId: "price_1OIa9BL7w2jHXlsS0gMw5Bob",
   },
 ];
