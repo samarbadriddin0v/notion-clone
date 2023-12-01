@@ -31,7 +31,6 @@ import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
 import useSubscription from "@/hooks/use-subscription";
 import { useUser } from "@clerk/clerk-react";
-import { Id } from "@/convex/_generated/dataModel";
 import { Loader } from "@/components/ui/loader";
 
 export const Sidebar = () => {
@@ -63,6 +62,8 @@ export const Sidebar = () => {
     } else {
       reset();
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile]);
 
   const collapse = () => {
@@ -144,7 +145,7 @@ export const Sidebar = () => {
     <>
       <div
         className={cn(
-          "group/sidebar h-screen bg-secondary overflow-y-auto relative flex w-60 flex-col z-50 sticky left-0 top-0",
+          "group/sidebar h-screen bg-secondary overflow-y-auto flex w-60 flex-col z-50 sticky left-0 top-0",
           isResetting && "transition-all ease-in duration-300",
           isMobile && "w-0"
         )}
