@@ -24,12 +24,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import TrashBox from "./trash-box";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Navbar } from "./navbar";
 
 export const Sidebar = () => {
   const isMobile = useMediaQuery("(max-width: 770px)");
   const router = useRouter();
+  const params = useParams();
+
   const createDocument = useMutation(api.document.createDocument);
 
   const sidebarRef = useRef<ElementRef<"div">>(null);
@@ -191,15 +194,19 @@ export const Sidebar = () => {
         )}
         ref={navbarRef}
       >
-        <nav className={cn("bg-transparent px-3 py-2 w-full")}>
-          {isCollapsed && (
-            <MenuIcon
-              className="h-6 w-6 text-muted-foreground"
-              role="button"
-              onClick={reset}
-            />
-          )}
-        </nav>
+        {!!params.documentId ? (
+          <Navbar isCollapsed={isCollapsed} reset={reset} />
+        ) : (
+          <nav className={cn("bg-transparent px-3 py-2 w-full")}>
+            {isCollapsed && (
+              <MenuIcon
+                className="h-6 w-6 text-muted-foreground"
+                role="button"
+                onClick={reset}
+              />
+            )}
+          </nav>
+        )}
       </div>
     </>
   );
