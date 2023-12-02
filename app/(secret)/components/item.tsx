@@ -75,7 +75,6 @@ export const Item = ({
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     event.stopPropagation();
-
     if (!id) return;
     createDocument({
       title: "Untitled",
