@@ -77,8 +77,11 @@ export async function GET(req: Request) {
 
     return NextResponse.json(subscriptions.data[0].plan.product.name);
   } catch (error) {
-    return NextResponse.json("Something went wrong. Please try again", {
-      status: 500,
-    });
+    return NextResponse.json(
+      `Something went wrong. Please try again - ${error}`,
+      {
+        status: 500,
+      }
+    );
   }
 }
