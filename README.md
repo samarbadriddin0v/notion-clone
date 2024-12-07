@@ -6,7 +6,7 @@
 
 <h2>🚀 Demo</h2>
 
-[https://notion.sammi.app/](https://notion.sammi.app/)
+[https://notion.sammi.ac/](https://notion.sammi.ac/)
 
   
   
